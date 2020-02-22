@@ -1,0 +1,115 @@
+* {
+	width: 400;
+	height: 150px;
+	padding: 0px;
+}
+
+#adden {
+
+line-height: 40px;
+  box-shadow: 0px 7px 17px -10px rgba(0,0,0,0);
+	display:block;
+	background: #FFFFFF;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border-radius: 1119px;
+	height: 40px;
+	padding-left: 10px;
+	background: #EE3333;
+	border:4px solid #EE3333;
+	top: calc(50% - 40px);
+	background: -moz-linear-gradient(left, #ffffff 46%, #2989d8 50%, #207cca 50%, #ee3333 55%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #ffffff 46%,#2989d8 50%,#207cca 50%,#ee3333 55%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #ffffff 46%,#2989d8 50%,#207cca 50%,#ee3333 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ee3333',GradientType=1 ); /* IE6-9 */
+}
+
+#adden input {
+	height: 40px;
+	border: 0px;
+	float:left;
+}
+
+#addeninput {
+	width: 320px;
+	border: 0px;
+	background: #FFFFFF;
+	border-radius: 1119px;
+	padding-left: 5px;
+	height: 50px;
+}
+#addeninput:focus {
+	outline: none;
+}
+
+#addensubmit {
+	background: #EE3333;
+	width: 40px;
+	color:#FFFFFF;
+	transition: 0.3s;
+}
+#addensubmit:focus {
+	color: #EEEEEE;
+}
+#addensubmit:hover {
+	background: #EE5555;
+	cursor: pointer;
+}
+
+
+#getlink {
+	display:block;
+	background: #FFFFFF;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border-radius: 1119px;
+	padding: 10px;
+	background: #FFFFFF;
+	border:4px solid #EE3333;
+	top: calc(50% - 35px);
+	line-height: 20px;
+	vertical-align:middle;
+    font-size: 16px;
+	height: 20px;
+	display: none;
+}
+
+
+
+
+.linka2 {
+	border: 1px solid #2068ff;
+	transition: 0.3s ease-in;
+	color: #2068ff;
+	padding: 1px 6px;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+
+.linka2::after {
+	content: '';
+}
+.linka2:hover::after {
+	content: "→";
+}
+
+.linka2:link {
+	color: #2068ff;
+}
+
+.linka2:visited {
+	color: #2068ff;
+}
+
+.linka2:hover {
+	color: #FFFFFF;
+	cursor: pointer;
+	background:  #2068ff;
+}
+	
+
