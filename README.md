@@ -8,7 +8,11 @@
 - Goto chrome://extensions/
 - And drag the file into the page
 
-### Firefox
+### Firefox (Install from store)
+- Go to https://addons.mozilla.org/de/firefox/addon/interaapps-accounts/
+- Press install :)
+
+### Firefox (Install by your own)
 - Go to https://github.com/interaapps/interaapps-browser-extension/releases
 - Download the Firefox.zip 
 - Goto about:addons
