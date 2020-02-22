@@ -1,7 +1,7 @@
 {
     "name": "InteraApps Accounts",
     "description": "InteraApps accounts addon",
-    "version": "1.0",
+    "version": "1.0.1",
     "author": "InteraApps",
     "manifest_version": 2,
     "browser_action": {
@@ -12,6 +12,9 @@
       "tabs",
       "http://*/*",
       "https://*/*"
+    ],
+    "background": [
+        "scripts/bg/background.js"
     ],
     "icons": {
         "32": "icon.png"

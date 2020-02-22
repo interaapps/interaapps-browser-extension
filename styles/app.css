@@ -74,7 +74,7 @@ body {
 #services {
     display: flex;
     text-align: center;
-    width: 100%;
+    width: fit-content;
     margin: auto;
 }
 
