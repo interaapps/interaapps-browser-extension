@@ -620,7 +620,7 @@ class Prajax {
             var close = document.createElement("a");
             $(close).addClass("waves-effect");
             $(close).addClass("alert_closebutton");
-            $(close).html("Ã—");
+            $(close).html("×");
             $(close).click(function() {
                 outerThis.close();
             });

@@ -13,9 +13,6 @@
       "http://*/*",
       "https://*/*"
     ],
-    "background": [
-        "scripts/bg/background.js"
-    ],
     "icons": {
         "32": "icon.png"
     }
