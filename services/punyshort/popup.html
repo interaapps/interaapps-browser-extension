@@ -5,34 +5,35 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <script src="jquery.js"></script>
+    <script src="/scripts/Cajax.js"></script>
+    <script src="/scripts/jdom.js"></script>
     <script src="popup.js"></script>
     <link rel="stylesheet" href="popup.css">
 </head>
 
-	<div id="adden">
-			<form>
-				<input class="logininput" id="addeninput" type="text" name="ins_shortlinks_link1" placeholder="Add the link here!">
-				
-				<a class="loginsubmit" id="addensubmit">Short</a>
-			</form>
+<body>
+	<div class="homepageimage">
+    
+		<div class="shortlink" id="shortlinkdiv">
+			<input type="text" class="shortlinkinput" id="shortlinkinput" placeholder="https://example.interaapps.de">
+			<select id="shortlinkdomain">
+					<option  value="pnsh.ga">pnsh.ga</option>
+					<option  value="puny.gq">puny.gq</option>
+					<option  value="shortit.ml">shortit.ml</option>
+			</select>
+			<a class="noSelection shortlinksubmit" id="shortlinksubmit">Send</a>
+		</div>
+
+	<br><br>
+	<div class="shortlink" style="display: none" id="outputlink">
+        <input readonly type="text" class="shortlinkinput" id="outputlinkinput">
+        <a style="border-radius: initial" class="noSelection shortlinksubmit" id="outputlinkstats">Stats</a>
+        <a class="noSelection shortlinksubmit" id="outputlinkcopy">Copy</a>
+    </div>
+
+    <p id="shortlinkerroralert" style="display: none; height: 0px">a</p>
+
+
 	</div>
-
-	<br>
-
-
-<div id="getlink">
-<a id="getlink1"></a>
-
-<a class="linka2" id="copytoclip">Copy</a>
-
-</div>
-
-
-
-
-
-
-
-
+</body>
 </html>

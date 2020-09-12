@@ -1,110 +1,112 @@
+const baseURL = "https://punyshort.ga";
 
-
-    function copyStringToClipboard (str) {
-       // Create new element
-       var el = document.createElement('textarea');
-       // Set value (string to be copied)
-       el.value = str;
-       // Set non-editable to avoid focus and move outside of view
-       el.setAttribute('readonly', '');
-       el.style = {position: 'absolute', left: '-9999px'};
-       document.body.appendChild(el);
-       // Select text inside element
-       el.select();
-       // Copy text to clipboard
-       document.execCommand('copy');
-	   document.body.removeChild(el);
-    }
-
-
-
-
-function loadJSON(path, success, error)
-{
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function()
-{
-if (xhr.readyState === XMLHttpRequest.DONE) {
-if (xhr.status === 200) {
-if (success)
-success(JSON.parse(xhr.responseText));
-} else {
-if (error)
-error(xhr);
-}
-}
-};
-
-xhr.open("GET", path, true);
-xhr.send();
-}
-
-
-var currentURL;
-
-
-chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-	currentURL  = tabs[0].url;
-	document.getElementById("addeninput").value = tabs[0].url;
+$(document).ready(function(){
+	chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+		$("#shortlinkinput").val(tabs[0].url);
+	});
 });
 
-var shortet = "";
 
-var error = "";
+var link = {};
 
 
-function sadf() {
+
+function showError(error) {
+	$("#shortlinkerroralert").text(error);
 	
-	
-	
-	
-	
-	var obj;
-
-loadJSON('https://www.punyshort.ga/api/jsonapi.php?shortlink='+document.getElementById("addeninput").value,
-function(data) {
-obj = data;
-
-document.getElementById("getlink1").innerHTML = "pnsh.ga/" + obj['url'];
-document.getElementById('getlink').style.display = 'block';
-document.getElementById('copytoclip').style.display = 'inline;';
-shortet = obj['url'];
-error = obj['error'];
-
-
-if (error != "none") {
-	document.getElementById('copytoclip').style.display = 'none';
-	if (error == "err") {
-		document.getElementById("getlink1").innerHTML = "Internal error! Try it again!";
-	}else if (error == "HttpOrHttpsMissing") {
-		document.getElementById("getlink1").innerHTML = "Add Https:// or Http:// to the link!";
-	}else if (error == "Unset") {
-		document.getElementById("getlink1").innerHTML = "Give me a valid link!";
-	}
+	$("#shortlinkerroralert").css({
+		display: "block",
+		opacity: "0"
+	});
+	setTimeout(() => {
+		$("#shortlinkerroralert").animate({
+			height: "",
+			opacity: 1
+		}, 500);
+	}, 500);
 }
 
-
-
-
-},
-function(xhr) {  },
-
-);
-	
+function hideError() {
+	$("#shortlinkerroralert").animate({
+		height: "0px",
+		opacity: "0"
+	}, 500);
+	setTimeout(() => {
+		$("#shortlinkerroralert").css("display", "none");
+	}, 500);
 }
 
-
-
-$(function(){
-
-	$("#addensubmit").click(function(){
-		sadf();
-	});
+$(document).ready(function(){
+	$("#outputlink").hide();
+	scrollPageYOffsetMin = 100;
 	
-	$("#copytoclip").click(function(){
-		copyStringToClipboard("https://pnsh.ga/"+shortet);
+	window.onscroll = function() {
+		checkScroll();
+
+		if (window.pageYOffset > 283 && window.innerWidth > 720) {
+			$(".homepageimage").css("marginTop", "43px");
+			$("#shortlinkdiv").css({
+				position: "fixed",
+				top: "3.3px",
+				left: "50%",
+				"width": "calc(100% - 500px)",
+				transform: "translateX(-50%)",
+				boxShadow: "0px 3px 5px 0px rgba(0,0,0,0.5)",
+				zIndex: "10001"
+			});
+		} else {
+			$(".homepageimage").css("marginTop", "");
+			$("#shortlinkdiv").css({
+				position: "",
+				top: "",
+				left: "",
+				"width": "",
+				transform: "",
+				boxShadow: "",
+				zIndex: "10001"
+			});
+		}
+
+		if (window.pageYOffset > scrollPageYOffsetMin) {
+			$("#logo img").attr("src", "/assets/images/icons/icon.svg");
+		} else {
+			$("#logo img").attr("src", "/assets/images/icons/light-icon.svg");
+		}
+	};
+	
+	$("#shortlinksubmit").click(function() {
+		if ($("#shortlinkinput").val() != "") {
+			Cajax.post(baseURL+"/api/v2/short", {
+				link: $("#shortlinkinput").val(),
+				domain: $("#shortlinkdomain").val()
+			}).then((resp)=>{
+				link = JSON.parse(resp.responseText);
+				$("#outputlink").hide();
+				console.log(link.error);
+				if (link.error == 0) {
+					hideError();
+					$("#outputlink").show();
+					$("#outputlinkinput").val(link.full_link);
+				} else if (link.error == 1)
+					showError("Invalid Link");
+				else if (link.error == 2)
+					showError("Please input something");
+				else
+					showError("Internal error");
+				if (window.pageYOffset > 283) {
+					scrollUpAnimation();
+				}
+			}).send();
+		} else
+			showError("Please input something");
 	});
 
+	$("#outputlinkcopy").click(function() {
+		$("#outputlinkinput").elem[0].select();
+		document.execCommand("copy");
+	});
 
-
+	$("#outputlinkstats").click(function() {
+		window.open(link.full_link+"/info");
+	});
 });
